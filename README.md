@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/27119cc7-023c-419e-ab7e-8664216046cf)# EX. NO: 1(A) : IMPLEMENTATION OF CAESAR CIPHER
+# EX. NO: 1(A) : IMPLEMENTATION OF CAESAR CIPHER
 
 ## AIM:
 To implement the simple substitution technique named Caesar cipher using C language.
