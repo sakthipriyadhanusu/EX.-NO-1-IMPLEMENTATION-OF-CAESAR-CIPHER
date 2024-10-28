@@ -20,17 +20,20 @@ STEP-5: Display the cipher text obtained above.
 #include <stdio.h>
 #include <ctype.h>
 
-void caesarCipher(char* text, int shift) {
+void caesarCipher(char* text, int shift, int decrypt) {
+    // If decrypting, reverse the shift
+    if (decrypt) {
+        shift = -shift;
+    }
+
     for (int i = 0; text[i] != '\0'; i++) {
         char ch = text[i];
         
- 
         if (isupper(ch)) {
-            ch = (ch + shift - 'A') % 26 + 'A';
+            ch = (ch - 'A' + shift + 26) % 26 + 'A'; // Adjust for uppercase
         }
-        
         else if (islower(ch)) {
-            ch = (ch + shift - 'a') % 26 + 'a';
+            ch = (ch - 'a' + shift + 26) % 26 + 'a'; // Adjust for lowercase
         }
 
         text[i] = ch;
@@ -41,24 +44,25 @@ int main() {
     char text[100];
     int shift;
 
-   
     printf("Enter a plaintext: ");
     fgets(text, sizeof(text), stdin);
 
     printf("Enter shift value: ");
     scanf("%d", &shift);
 
-  
-    caesarCipher(text, shift);
-
-  
+    // Perform encryption
+    caesarCipher(text, shift, 0);
     printf("Ciphertext: %s\n", text);
+
+    // Perform decryption
+    caesarCipher(text, shift, 1);
+    printf("Decrypted text: %s\n", text);
+
     return 0;
 }
 ```
-
 ## OUTPUT:
-![Screenshot 2024-08-19 144316](https://github.com/user-attachments/assets/34e0dfe1-8716-41c0-afd7-d05d2fcece57)
+![Screenshot 2024-10-28 134544](https://github.com/user-attachments/assets/8ec3bb62-6acd-49c9-abde-609794c93607)
 
 
 ## RESULT :
