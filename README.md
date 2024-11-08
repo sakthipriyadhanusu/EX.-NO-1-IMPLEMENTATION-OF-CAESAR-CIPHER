@@ -18,51 +18,37 @@ STEP-5: Display the cipher text obtained above.
 ## PROGRAM:
 ```
 #include <stdio.h>
-#include <ctype.h>
-
-void caesarCipher(char* text, int shift, int decrypt) {
-    // If decrypting, reverse the shift
-    if (decrypt) {
-        shift = -shift;
-    }
-
-    for (int i = 0; text[i] != '\0'; i++) {
-        char ch = text[i];
-        
-        if (isupper(ch)) {
-            ch = (ch - 'A' + shift + 26) % 26 + 'A'; // Adjust for uppercase
-        }
-        else if (islower(ch)) {
-            ch = (ch - 'a' + shift + 26) % 26 + 'a'; // Adjust for lowercase
-        }
-
-        text[i] = ch;
-    }
+#include <stdlib.h>
+void caesarEncrypt(char *text, int key) {
+ for (int i = 0; text[i] != '\0'; i++) {
+ char c = text[i];
+ if (c >= 'A' && c <= 'Z') {
+ text[i] = ((c - 'A' + key) % 26 + 26) % 26 + 'A';
+ }
+ else if (c >= 'a' && c <= 'z') {
+ text[i] = ((c - 'a' + key) % 26 + 26) % 26 + 'a';
+ }
+ }
 }
-
+void caesarDecrypt(char *text, int key) {
+ caesarEncrypt(text, -key);
+}
 int main() {
-    char text[100];
-    int shift;
-
-    printf("Enter a plaintext: ");
-    fgets(text, sizeof(text), stdin);
-
-    printf("Enter shift value: ");
-    scanf("%d", &shift);
-
-    // Perform encryption
-    caesarCipher(text, shift, 0);
-    printf("Ciphertext: %s\n", text);
-
-    // Perform decryption
-    caesarCipher(text, shift, 1);
-    printf("Decrypted text: %s\n", text);
-
-    return 0;
+ char message[100]; 
+ int key;
+ printf("Enter the message to encrypt: ");
+ fgets(message, sizeof(message), stdin); 
+ printf("Enter the Caesar Cipher key (an integer): ");
+ scanf("%d", &key); // Read the key from the user
+ caesarEncrypt(message, key);
+ printf("Encrypted Message: %s", message);
+ caesarDecrypt(message, key);
+ printf("Decrypted Message: %s", message);
+ return 0;
 }
 ```
 ## OUTPUT:
-![Screenshot 2024-10-28 134544](https://github.com/user-attachments/assets/8ec3bb62-6acd-49c9-abde-609794c93607)
+![Screenshot 2024-11-08 184821](https://github.com/user-attachments/assets/93bc7bb8-3f27-40e8-8855-4b88e2a9b88b)
 
 
 ## RESULT :
